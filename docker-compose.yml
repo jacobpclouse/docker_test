@@ -1,0 +1,23 @@
+# docker-compose up --build
+# docker-compose down --volumes --remove-orphans
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+
+  my-project:
+    build:
+      context: .
+      dockerfile: my-project/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./my-project:/app
+      # - /app/node_modules  # Prevents node_modules from being overridden
+    depends_on:
+      - backend
