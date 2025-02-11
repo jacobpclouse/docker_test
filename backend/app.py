@@ -14,18 +14,21 @@ def defang_datetime():
 
 
 app = Flask(__name__)
-Cors = CORS(app)
-CORS(app, resources={r'/*': {'origins': '*'}},CORS_SUPPORTS_CREDENTIALS = True)
-app.config['CORS_HEADERS'] = 'Content-Type'
+
+CORS(app, supports_credentials=True)
+
+# Cors = CORS(app)
+# CORS(app, resources={r'/*': {'origins': '*'}},CORS_SUPPORTS_CREDENTIALS = True)
+# app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/message', methods=['POST'])
 def receive_message():
     message = request.json.get('message')
     title = f'At: {defang_datetime()} you sent this: {message}'
     print(message)
-    #return jsonify(success=True)
     return title
 
 
-if __name__ == '__main__':    
-   app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", debug=True)    
+#    app.run(debug=True)

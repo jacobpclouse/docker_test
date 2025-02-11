@@ -19,8 +19,8 @@ COPY my-project/ /app/
 # Expose the vue app port
 EXPOSE 8080
 
-# # Set API base URL for React
-# ENV REACT_APP_API_BASE_URL=http://backend:5000
+# Set API base URL for React
+ENV VUE_APP_API_BASE_URL=http://backend:5000
 
 # Build the React app (optional, for production use)
 # RUN npm run build
